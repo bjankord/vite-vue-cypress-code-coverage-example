@@ -2,14 +2,22 @@
   "name": "vite-vue-cypress-code-coverage-example",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 4173",
     "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "preview": "vite preview --port 4173",
-    "test:e2e": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress open --e2e'",
-    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --e2e'",
-    "test:unit": "cypress open --component",
-    "test:unit:ci": "cypress run --component --quiet --reporter spec",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "pretest:dist:e2e": "INSTRUMENT_BUILD=true vite build",
+    "test:dist:e2e": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --e2e'",
+    "pretest:dist:component": "INSTRUMENT_BUILD=true vite build",
+    "test:dist:component": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --component --quiet --reporter spec'",
+    "pretest:dist:ci": "INSTRUMENT_BUILD=true vite build",
+    "test:dist:ci": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --component --quiet --reporter spec && cypress run --e2e'",
+    "//comment-test:dev": "The below scripts are intended to be run against the dev server running npm run dev in a separate terminal window",
+    "test:dev:e2e": "cypress open --e2e",
+    "test:dev:e2e:ci": "cypress run --e2e",
+    "test:dev:component": "cypress open --component",
+    "test:dev:component:ci": "cypress run --component --quiet --reporter spec",
+    "test:dev:ci": "npm run test:dev:component:ci && npm run test:dev:e2e:ci"
   },
   "dependencies": {
     "pinia": "^2.0.14",
@@ -17,12 +25,14 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "cypress": "^10.0.2",
     "eslint": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^8.2.0",
     "start-server-and-test": "^1.14.0",
+    "vite-plugin-istanbul": "^2.7.3",
     "vite": "^2.9.9"
   }
 }
