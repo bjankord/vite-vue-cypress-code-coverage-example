@@ -1,0 +1,1 @@
+# vite-vue-cypress-code-coverage-example
