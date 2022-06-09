@@ -87,7 +87,7 @@ It can be nice to collect coverage from you dev server as it will allow you to q
 
 ## Collecting coverage from preview server
 * You can run `npm run test:dist:e2e` to collect component coverage from you dist/built files.
-  * The `test:dist:e2e` npm script has a pre script, `pretest:dist:e2e` that will run `vite build` with istanbul instrumentation turned on via the `INSTRUMENT_BUILD=true` env variable
+  * The `test:dist:e2e` npm script includes a call to `npm run instrument-build` that will run `vite build` with istanbul instrumentation turned on via the `INSTRUMENT_BUILD=true` env variable
   * TODO - Figure out why this doesn't collect from all tested files
   * This will generate coverage for the following files:
     * src/main.js
@@ -134,7 +134,7 @@ It can be nice to collect coverage from you dev server as it will allow you to q
       ```
 
 * You can run `npm run test:dist:component` to collect component coverage from you dist/built files.
-  * The `test:dist:component` npm script has a pre script, `pretest:dist:component` that will run `vite build` with istanbul instrumentation turned on via the `INSTRUMENT_BUILD=true` env variable
+  * The `test:dist:component` npm script includes a call to `npm run instrument-build` that will run `vite build` with istanbul instrumentation turned on via the `INSTRUMENT_BUILD=true` env variable
   * This will generate coverage for the following files:
     * HelloWorld.vue
     * UnusedComponent.vue

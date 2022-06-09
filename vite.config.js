@@ -22,7 +22,8 @@ export default defineConfig({
       exclude: ['node_modules'],
       extension: ['.js', '.ts', '.vue'],
       /**
-       * This allows us to omit the INSTRUMENT_BUILD env variable when running npm run build.
+       * This allows us to omit the INSTRUMENT_BUILD env variable when running the production build via
+       * npm run build.
        * More details below.
        */
       requireEnv: false,
@@ -35,7 +36,7 @@ export default defineConfig({
        * To allow collecting coverage from running cypress against the dev server as well as the
        * preview server (built files), we use an env variable, INSTRUMENT_BUILD, to set
        * forceBuildInstrument to true when running against the preview server via the
-       * pretest:dist:e2e npm script.
+       * instrument-build npm script.
        *
        * When you run `npm run build`, the INSTRUMENT_BUILD env variable is omitted from the npm
        * script which will result in forceBuildInstrument being set to false, ensuring your
